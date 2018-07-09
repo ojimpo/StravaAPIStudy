@@ -1,17 +1,52 @@
 import axios from 'axios';
 
-const athletes_id = "32390131";
+const athletes_id = "7198461";
 const endPoint = `/athletes/${athletes_id}/`;
 const url = `https://www.strava.com/api/v3${endPoint}`;
-const requestURL = "stats\" -H \"accept: application/json\" -H \"authorization: Bearer d65657c4a562d558b0b891d166e3b95fe13be27e\"";
+const requestURL = "stats\" -H \"accept: application/json\" -H \"authorization: Bearer cd5888603bcba5c198c0328349709a6cce40b438\"";
 import 'dotenv/config';
 import * as strava from 'strava-v3';
 
-strava.athlete.get({id:32390131}, (err,payload,limits) => {
+strava.athlete.listActivities({"access_token" : "cd5888603bcba5c198c0328349709a6cce40b438", "per_page": "100"}, (err,payload,limits) => {
     if (err) {
+        console.log("error!");
         console.log(err);
     } else {
-        console.log(payload);
+        if (payload != undefined) {
+            console.log(payload);
+
+            const latestItem = new Date(payload[0].start_date);
+            const weekItem = new Date(latestItem.getDate() - 7);
+
+            const oneWeekArray  =[];
+
+            payload.forEach((item ,index)=>{
+                const itemData = new Date(item.start_date);
+                if (itemData.getDate()) {
+                    oneWeekArray.push(item);
+                } else {
+                    console.log("一週間以上前です!")
+                }
+            });
+
+            console.log(`一週間のアイテム数 : ${oneWeekArray.length}`);
+
+            let totalDist: number = 0;
+
+            oneWeekArray.forEach((item, index) => {
+                const itemDist = item.distance;
+                totalDist += Number(itemDist);
+                console.log(totalDist);
+            });
+
+            console.log(`総距離 : ${totalDist}メートル`);
+
+
+            console.log(`最新の日時: ${latestItem}`);
+
+        } else {
+            console.log("payload is undefined");
+        }
     }
 });
 
@@ -26,6 +61,5 @@ strava.athlete.get({id:32390131}, (err,payload,limits) => {
 // }).catch(error => {
 //     console.log("Failed!")
 // });
-
 
 
