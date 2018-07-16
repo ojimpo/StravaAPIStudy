@@ -25,15 +25,15 @@ strava.athlete.listActivities({"access_token" : "cd5888603bcba5c198c0328349709a6
             payload.forEach((item ,index)=>{
                 const itemDate = new Date(item.start_date);
                 const itemType = item.type;
-                if (itemType == "Ride") {
-                    if (itemDate.getDate() >= weekItem.getDate()) {
+                if (itemDate.getDate() >= weekItem.getDate()) {
+                    if (itemType == "Ride") {
                         oneWeekArray.push(item);
                         console.log(itemDate);
                     } else {
-                        console.log("一週間以上前です!")
+                        console.log("自転車の記録では無いです!")
                     }
                 } else {
-                    console.log("自転車の記録では無いです!")
+                    console.log("一週間以上前です!")
                 }
             });
 

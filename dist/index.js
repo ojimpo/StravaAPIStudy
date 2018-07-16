@@ -22,17 +22,17 @@ strava.athlete.listActivities({ "access_token": "cd5888603bcba5c198c0328349709a6
             payload.forEach(function (item, index) {
                 var itemDate = new Date(item.start_date);
                 var itemType = item.type;
-                if (itemType == "Ride") {
-                    if (itemDate.getDate() >= weekItem_1.getDate()) {
+                if (itemDate.getDate() >= weekItem_1.getDate()) {
+                    if (itemType == "Ride") {
                         oneWeekArray_1.push(item);
                         console.log(itemDate);
                     }
                     else {
-                        console.log("一週間以上前です!");
+                        console.log("自転車の記録では無いです!");
                     }
                 }
                 else {
-                    console.log("自転車の記録では無いです!");
+                    console.log("一週間以上前です!");
                 }
             });
             console.log("\u4E00\u9031\u9593\u306E\u30A2\u30A4\u30C6\u30E0\u6570 : " + oneWeekArray_1.length);
