@@ -44,7 +44,10 @@ strava.athlete.listActivities({"access_token" : "cd5888603bcba5c198c0328349709a6
                 totalDist += Number(itemDist);
             });
 
+            const totalDistKm = totalDist / 1000;
+
             console.log(`総距離 : ${totalDist}メートル`);
+            console.log(`総距離 : ${totalDistKm}キロメートル`);
 
 
             console.log(`最新の日時: ${latestItem}`);

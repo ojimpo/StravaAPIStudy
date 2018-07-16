@@ -40,7 +40,9 @@ strava.athlete.listActivities({ "access_token": "cd5888603bcba5c198c0328349709a6
                 var itemDist = item.distance;
                 totalDist_1 += Number(itemDist);
             });
+            var totalDistKm = totalDist_1 / 1000;
             console.log("\u7DCF\u8DDD\u96E2 : " + totalDist_1 + "\u30E1\u30FC\u30C8\u30EB");
+            console.log("\u7DCF\u8DDD\u96E2 : " + totalDistKm + "\u30AD\u30ED\u30E1\u30FC\u30C8\u30EB");
             console.log("\u6700\u65B0\u306E\u65E5\u6642: " + latestItem);
             console.log("\u4E00\u9031\u9593\u524D\u306E\u65E5\u6642: " + weekItem_1);
             console.log("\u4E00\u9031\u9593\u306E\u30A2\u30A4\u30C6\u30E0\u6570 : " + oneWeekArray_1.length);
