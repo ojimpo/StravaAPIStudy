@@ -16,20 +16,27 @@ strava.athlete.listActivities({ "access_token": "cd5888603bcba5c198c0328349709a6
             console.log(payload);
             var latestItem = new Date(payload[0].start_date);
             // const weekItem = new Date(latestItem.getDate() - 7);
-            var weekItem = new Date(payload[0].start_date);
-            weekItem.setDate(weekItem.getDate() - 7);
+            var weekItem_1 = new Date(payload[0].start_date);
+            weekItem_1.setDate(weekItem_1.getDate() - 7);
             var oneWeekArray_1 = [];
             payload.forEach(function (item, index) {
-                var itemData = new Date(item.start_date);
-                if (itemData.getDate()) {
-                    oneWeekArray_1.push(item);
+                var itemDate = new Date(item.start_date);
+                var itemType = item.type;
+                if (itemType == "Ride") {
+                    if (itemDate.getDate() >= weekItem_1.getDate()) {
+                        oneWeekArray_1.push(item);
+                        console.log(itemDate);
+                    }
+                    else {
+                        console.log("一週間以上前です!");
+                    }
                 }
                 else {
-                    console.log("一週間以上前です!");
+                    console.log("自転車の記録では無いです!");
                 }
             });
             console.log("\u4E00\u9031\u9593\u306E\u30A2\u30A4\u30C6\u30E0\u6570 : " + oneWeekArray_1.length);
-            console.log(weekItem);
+            console.log(weekItem_1);
             console.log(latestItem);
             var totalDist_1 = 0;
             oneWeekArray_1.forEach(function (item, index) {
