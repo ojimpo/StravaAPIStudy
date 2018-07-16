@@ -22,7 +22,7 @@ strava.athlete.listActivities({ "access_token": "cd5888603bcba5c198c0328349709a6
             payload.forEach(function (item, index) {
                 var itemDate = new Date(item.start_date);
                 var itemType = item.type;
-                if (itemDate.getDate() >= weekItem_1.getDate()) {
+                if (itemDate.getTime() >= weekItem_1.getTime()) {
                     if (itemType == "Ride") {
                         oneWeekArray_1.push(item);
                         console.log(itemDate);
@@ -35,9 +35,6 @@ strava.athlete.listActivities({ "access_token": "cd5888603bcba5c198c0328349709a6
                     console.log("一週間以上前です!");
                 }
             });
-            console.log("\u4E00\u9031\u9593\u306E\u30A2\u30A4\u30C6\u30E0\u6570 : " + oneWeekArray_1.length);
-            console.log(weekItem_1);
-            console.log(latestItem);
             var totalDist_1 = 0;
             oneWeekArray_1.forEach(function (item, index) {
                 var itemDist = item.distance;
@@ -45,7 +42,8 @@ strava.athlete.listActivities({ "access_token": "cd5888603bcba5c198c0328349709a6
             });
             console.log("\u7DCF\u8DDD\u96E2 : " + totalDist_1 + "\u30E1\u30FC\u30C8\u30EB");
             console.log("\u6700\u65B0\u306E\u65E5\u6642: " + latestItem);
-            console.log(latestItem);
+            console.log("\u4E00\u9031\u9593\u524D\u306E\u65E5\u6642: " + weekItem_1);
+            console.log("\u4E00\u9031\u9593\u306E\u30A2\u30A4\u30C6\u30E0\u6570 : " + oneWeekArray_1.length);
         }
         else {
             console.log("payload is undefined");

@@ -25,7 +25,7 @@ strava.athlete.listActivities({"access_token" : "cd5888603bcba5c198c0328349709a6
             payload.forEach((item ,index)=>{
                 const itemDate = new Date(item.start_date);
                 const itemType = item.type;
-                if (itemDate.getDate() >= weekItem.getDate()) {
+                if (itemDate.getTime() >= weekItem.getTime()) {
                     if (itemType == "Ride") {
                         oneWeekArray.push(item);
                         console.log(itemDate);
@@ -37,10 +37,6 @@ strava.athlete.listActivities({"access_token" : "cd5888603bcba5c198c0328349709a6
                 }
             });
 
-            console.log(`一週間のアイテム数 : ${oneWeekArray.length}`);
-
-            console.log(weekItem);
-            console.log(latestItem);
             let totalDist: number = 0;
 
             oneWeekArray.forEach((item, index) => {
@@ -52,7 +48,8 @@ strava.athlete.listActivities({"access_token" : "cd5888603bcba5c198c0328349709a6
 
 
             console.log(`最新の日時: ${latestItem}`);
-            console.log(latestItem);
+            console.log(`一週間前の日時: ${weekItem}`);
+            console.log(`一週間のアイテム数 : ${oneWeekArray.length}`);
 
         } else {
             console.log("payload is undefined");
